@@ -12,6 +12,14 @@ public class SystemManager : MonoBehaviour
     List<Usable> _guns;
     [SerializeField]
     List<Usable> _evacCenters;
+    [SerializeField]
+    int _funds;
+    [SerializeField]
+    int _upgradeCost;
+    [SerializeField]
+    float _timeToImpact;
+
+    private float _evacProgress = 0f;
 
     private Dictionary<string, UsableCategory> _usableCategoryMap = new Dictionary<string, UsableCategory>();
 
@@ -36,6 +44,16 @@ public class SystemManager : MonoBehaviour
         Instance = this;
         _usableCategoryMap.Add(GUNS, new UsableCategory(_guns, 1, 1, 1));
         _usableCategoryMap.Add(EVAC, new UsableCategory(_evacCenters, 1, 1, 1));
+    }
+
+    private void Update()
+    {
+        _timeToImpact -= Time.deltaTime;
+
+        if (_timeToImpact <= 0f)
+        {
+            Debug.Log("GAME OVER");
+        }
     }
 
     public bool IsUseableEnabled(string category, int i)
@@ -76,5 +94,46 @@ public class SystemManager : MonoBehaviour
     public int GetUsableReloadLevel(string category)
     {
         return _usableCategoryMap[category]._reloadLevel;
+    }
+
+    public int GetFunds()
+    {
+        return _funds;
+    }
+
+    public int GetUpgradeCost()
+    {
+        return _upgradeCost;
+    }
+
+    public void UseFunds(int amount)
+    {
+        _funds -= amount;
+    }
+
+    public float GetTimeToImpact()
+    {
+        return _timeToImpact;
+    }
+
+    public void AsteroidHit()
+    {
+        _timeToImpact += _usableCategoryMap[GUNS]._powerLevel;
+    }
+
+    public float GetEvacProgress()
+    {
+        return _evacProgress;
+    }
+
+    public void EvacSuccess()
+    {
+        _evacProgress += _usableCategoryMap[EVAC]._powerLevel * 10;
+
+        if (_evacProgress >= 100f)
+        {
+            Debug.Log("WIN");
+            _evacProgress = 99.9999f;
+        }
     }
 }

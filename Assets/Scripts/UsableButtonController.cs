@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UsableButtonController : MonoBehaviour
@@ -14,6 +15,8 @@ public class UsableButtonController : MonoBehaviour
     private GameObject _reloadingGameObject;
     [SerializeField]
     private GameObject _readyGameObject;
+    [SerializeField]
+    private TextMeshProUGUI _buyText;
 
     private GameObject _activeGameObject = null;
 
@@ -27,6 +30,7 @@ public class UsableButtonController : MonoBehaviour
         else if (SystemManager.Instance.IsUsableBuyable(_usable.Category, _usable.Index))
         {
             EnableNewState(_buyableGameObject);
+            _buyText.text = "$" + _usable.Cost;
         }
         else if (SystemManager.Instance.IsUseableEnabled(_usable.Category, _usable.Index))
         {
@@ -60,6 +64,13 @@ public class UsableButtonController : MonoBehaviour
 
     public void Buy()
     {
+        if (SystemManager.Instance.GetFunds() < _usable.Cost)
+        {
+            Debug.Log("NOT ENOUGH MONEY");
+            return;
+        }
+
+        SystemManager.Instance.UseFunds(_usable.Cost);
         SystemManager.Instance.EnableNewUsable(_usable.Category);
     }
 }

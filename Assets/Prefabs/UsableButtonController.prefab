@@ -1131,6 +1131,7 @@ MonoBehaviour:
   _buyableGameObject: {fileID: 6319126294659545620}
   _reloadingGameObject: {fileID: 6319126294674250496}
   _readyGameObject: {fileID: 6319126295571113849}
+  _buyText: {fileID: 6319126296299791071}
 --- !u!114 &6319126296528766355
 MonoBehaviour:
   m_ObjectHideFlags: 0

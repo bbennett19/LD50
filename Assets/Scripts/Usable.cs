@@ -10,6 +10,10 @@ public class Usable : MonoBehaviour
     public int Index;
     [SerializeField]
     public string Category;
+    [SerializeField]
+    public int Cost;
+    [SerializeField]
+    private ActionExecutor _actionExecutor;
 
     private void Awake()
     {
@@ -23,6 +27,7 @@ public class Usable : MonoBehaviour
 
     public void Use()
     {
+        _actionExecutor.ExecuteAction();
         _timeSinceLastUse = 0f;
     }
 

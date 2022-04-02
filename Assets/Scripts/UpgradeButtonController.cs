@@ -55,6 +55,14 @@ public class UpgradeButtonController : MonoBehaviour
 
     public void BuyLevel()
     {
+        if (SystemManager.Instance.GetFunds() < SystemManager.Instance.GetUpgradeCost())
+        {
+            Debug.Log("NOT ENOUGH MONEY");
+            return;
+        }
+
+        SystemManager.Instance.UseFunds(SystemManager.Instance.GetUpgradeCost());
+
         if (_isForPower)
             SystemManager.Instance.IncreaseUsablePowerLevel(_category);
         else
