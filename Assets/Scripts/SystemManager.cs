@@ -67,4 +67,14 @@ public class SystemManager : MonoBehaviour
     {
         _usableCategoryMap[category]._reloadLevel++;
     }
+
+    public int GetUsablePowerLevel(string category)
+    {
+        return _usableCategoryMap[category]._powerLevel;
+    }
+
+    public int GetUsableReloadLevel(string category)
+    {
+        return _usableCategoryMap[category]._reloadLevel;
+    }
 }
