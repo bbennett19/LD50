@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 2
   Category: EVAC
-  Cost: 80
+  Cost: 300
   _actionExecutor: {fileID: 1973086666}
 --- !u!1 &25541935
 GameObject:
@@ -3323,7 +3323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &507474693
 Transform:
   m_ObjectHideFlags: 0
@@ -3694,8 +3694,12 @@ PrefabInstance:
       value: BuyableUpgrade (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _level
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _isForPower
@@ -3845,7 +3849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 3
   Category: GUNS
-  Cost: 30
+  Cost: 300
   _actionExecutor: {fileID: 953043092}
 --- !u!1 &634608411
 GameObject:
@@ -4434,6 +4438,14 @@ PrefabInstance:
       value: BuyableUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _isForPower
       value: 0
       objectReference: {fileID: 0}
@@ -5010,8 +5022,12 @@ PrefabInstance:
       value: BuyableUpgrade (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _level
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _category
@@ -6267,7 +6283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 1
   Category: EVAC
-  Cost: 40
+  Cost: 150
   _actionExecutor: {fileID: 1973086666}
 --- !u!1 &1036915530
 GameObject:
@@ -6367,8 +6383,12 @@ PrefabInstance:
       value: BuyableUpgrade (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _level
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6749876567934318644, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: m_Pivot.x
@@ -6521,11 +6541,10 @@ MonoBehaviour:
   - {fileID: 1031907871}
   - {fileID: 16898234}
   - {fileID: 1234279819}
-  _funds: 100
-  _moneyPerHit: 0
-  _moneyPerEvac: 0
+  _funds: 50
+  _moneyPerHit: 50
+  _moneyPerEvac: 50
   _displayFunds: 0
-  _upgradeCost: 30
   _timeToImpact: 60
   _asteroid: {fileID: 1797387880}
   _bigScreenLogo: {fileID: 1124769694}
@@ -6533,6 +6552,26 @@ MonoBehaviour:
   _compScreenLogo: {fileID: 414270399}
   _compScreenMain: {fileID: 1480735572}
   _skipIntro: 1
+  _weaponLevelPower:
+  - 12
+  - 15
+  - 18
+  - 21
+  _weaponLevelSpeed:
+  - 20
+  - 17
+  - 14
+  - 11
+  _evacLevelPower:
+  - 7.5
+  - 10
+  - 12.5
+  - 15
+  _evacLevelSpeed:
+  - 40
+  - 35
+  - 30
+  - 25
 --- !u!4 &1056387161
 Transform:
   m_ObjectHideFlags: 0
@@ -6617,6 +6656,14 @@ PrefabInstance:
     - target: {fileID: 2432452304532435722, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: m_Name
       value: BuyableUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _level
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _category
@@ -7069,7 +7116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 1
   Category: GUNS
-  Cost: 10
+  Cost: 100
   _actionExecutor: {fileID: 953043092}
 --- !u!224 &1225958866 stripped
 RectTransform:
@@ -7121,7 +7168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 3
   Category: EVAC
-  Cost: 120
+  Cost: 450
   _actionExecutor: {fileID: 1973086666}
 --- !u!1 &1241704079
 GameObject:
@@ -7181,6 +7228,14 @@ PrefabInstance:
     - target: {fileID: 2432452304532435722, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: m_Name
       value: BuyableUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _level
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _category
@@ -8382,8 +8437,12 @@ PrefabInstance:
       value: BuyableUpgrade (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _level
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _isForPower
@@ -9383,8 +9442,12 @@ PrefabInstance:
       value: BuyableUpgrade (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _level
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _category
@@ -9584,8 +9647,12 @@ PrefabInstance:
       value: BuyableUpgrade (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _level
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _category
@@ -9785,8 +9852,12 @@ PrefabInstance:
       value: BuyableUpgrade (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _level
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _category
@@ -11331,7 +11402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 2
   Category: GUNS
-  Cost: 20
+  Cost: 200
   _actionExecutor: {fileID: 953043092}
 --- !u!1 &1973086664
 GameObject:
@@ -12408,8 +12479,12 @@ PrefabInstance:
       value: BuyableUpgrade (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: _level
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6749876567934318644, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: m_Pivot.x
@@ -12749,6 +12824,14 @@ PrefabInstance:
     - target: {fileID: 2432452304532435722, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: m_Name
       value: BuyableUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _cost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361677155016609427, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
+      propertyPath: _level
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6749876567934318644, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
       propertyPath: m_Pivot.x

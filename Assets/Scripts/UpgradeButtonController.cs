@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UpgradeButtonController : MonoBehaviour
@@ -11,11 +12,15 @@ public class UpgradeButtonController : MonoBehaviour
     [SerializeField]
     private bool _isForPower;
     [SerializeField]
+    private int _cost;
+    [SerializeField]
     private GameObject _disabledGameObject;
     [SerializeField]
     private GameObject _buyableGameObject;
     [SerializeField]
     private GameObject _purchasedGameObject;
+    [SerializeField]
+    TextMeshProUGUI _costText;
 
     private GameObject _currentActive;
 
@@ -30,6 +35,7 @@ public class UpgradeButtonController : MonoBehaviour
         }
         else if (level == _level - 1)
         {
+            _costText.text = "$" + _cost;
             EnableNewState(_buyableGameObject);
         }
         else
@@ -55,13 +61,13 @@ public class UpgradeButtonController : MonoBehaviour
 
     public void BuyLevel()
     {
-        if (SystemManager.Instance.GetFunds() < SystemManager.Instance.GetUpgradeCost())
+        if (SystemManager.Instance.GetFunds() < _cost)
         {
             Debug.Log("NOT ENOUGH MONEY");
             return;
         }
 
-        SystemManager.Instance.UseFunds(SystemManager.Instance.GetUpgradeCost());
+        SystemManager.Instance.UseFunds(_cost);
 
         if (_isForPower)
             SystemManager.Instance.IncreaseUsablePowerLevel(_category);

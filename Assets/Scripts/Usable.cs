@@ -17,7 +17,12 @@ public class Usable : MonoBehaviour
 
     private void Awake()
     {
-        _timeSinceLastUse = _resetTime;
+        _timeSinceLastUse = 1000f;
+    }
+
+    public void UpdateResetTime(float newTime)
+    {
+        _resetTime = newTime;
     }
 
     public bool CanUse()

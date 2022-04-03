@@ -17,8 +17,6 @@ public class SystemManager : MonoBehaviour
     [SerializeField]
     int _funds, _moneyPerHit, _moneyPerEvac, _displayFunds;
     [SerializeField]
-    int _upgradeCost;
-    [SerializeField]
     float _timeToImpact;
     [SerializeField]
     Asteroid _asteroid;
@@ -26,6 +24,8 @@ public class SystemManager : MonoBehaviour
     GameObject _bigScreenLogo, _bigScreenMain, _compScreenLogo, _compScreenMain;
     [SerializeField]
     bool _skipIntro;
+    [SerializeField]
+    List<float> _weaponLevelPower, _weaponLevelSpeed, _evacLevelPower, _evacLevelSpeed;
 
     private float _evacProgress = 0f;
     private bool _active = false;
@@ -52,8 +52,11 @@ public class SystemManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        _usableCategoryMap.Add(GUNS, new UsableCategory(_guns, 1, 1, 1));
-        _usableCategoryMap.Add(EVAC, new UsableCategory(_evacCenters, 1, 1, 1));
+        _usableCategoryMap.Add(GUNS, new UsableCategory(_guns, 1, 0, 0));
+        _usableCategoryMap.Add(EVAC, new UsableCategory(_evacCenters, 1, 0, 0));
+
+        _guns.ForEach((t) => t.UpdateResetTime(_weaponLevelSpeed[0]));
+        _evacCenters.ForEach(t => t.UpdateResetTime(_evacLevelSpeed[0]));
     }
 
     IEnumerator Start()
@@ -138,7 +141,13 @@ public class SystemManager : MonoBehaviour
 
     public void IncreaseUsableReloadLevel(string category)
     {
-        _usableCategoryMap[category]._reloadLevel++;
+        UsableCategory c = _usableCategoryMap[category];
+        int newLevel = c._reloadLevel + 1;
+        c._reloadLevel = newLevel;
+        float time = category == GUNS ? _weaponLevelSpeed[newLevel] : _evacLevelSpeed[newLevel];
+        c._usables.ForEach(t => t.UpdateResetTime(time));
+
+        Debug.Log(category + " RESET TIME: " + time);
     }
 
     public int GetUsablePowerLevel(string category)
@@ -161,19 +170,14 @@ public class SystemManager : MonoBehaviour
         return _displayFunds;
     }
 
-    public int GetUpgradeCost()
-    {
-        return _upgradeCost;
-    }
-
-    public void UseFunds(int amount)
+    public void UseFunds(int amount, float delay=0f)
     {
         _funds -= amount;
 
         if (_fundsTween != null && _fundsTween.active)
             _fundsTween.Kill();
 
-        _fundsTween = DOVirtual.Int(_displayFunds, _funds, .5f, UpdateDisplayFunds);
+        _fundsTween = DOVirtual.Int(_displayFunds, _funds, .5f, UpdateDisplayFunds).SetDelay(delay);
     }
 
     private void UpdateDisplayFunds(int funds)
@@ -188,9 +192,12 @@ public class SystemManager : MonoBehaviour
 
     public void AsteroidHit()
     {
+        float incTime = _weaponLevelPower[_usableCategoryMap[GUNS]._powerLevel];
+        Debug.Log("TIME ADDED: " + incTime);
         _active = false;
-        float newTime = _timeToImpact + _usableCategoryMap[GUNS]._powerLevel * 30;
+        float newTime = _timeToImpact + incTime;
         DOVirtual.Float(_timeToImpact, newTime, 1f, SetImpactTime).SetDelay(1f).OnComplete(() => _active = true).SetEase(Ease.Linear);
+        UseFunds(-_moneyPerHit, 1f);
     }
 
     private void SetImpactTime(float time)
@@ -207,13 +214,19 @@ public class SystemManager : MonoBehaviour
 
     public void EvacSuccess()
     {
-        float newEvacProgress = _evacProgress + _usableCategoryMap[EVAC]._powerLevel * 10;
+        float progressInc = _evacLevelPower[_usableCategoryMap[EVAC]._powerLevel];
+        Debug.Log("PROGRESS ADDED: " + progressInc);
+        float newEvacProgress = _evacProgress + progressInc;
         DOVirtual.Float(_evacProgress, newEvacProgress, 1f, SetEvacProgress).SetDelay(1f);
 
         if (_evacProgress >= 100f)
         {
             _evacProgress = 99.9999f;
             StartCoroutine(WinGame());
+        }
+        else
+        {
+            UseFunds(-_moneyPerEvac, 1f);
         }
     }
 
