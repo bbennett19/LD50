@@ -48,6 +48,24 @@ public class SystemManager : MonoBehaviour
         _usableCategoryMap.Add(EVAC, new UsableCategory(_evacCenters, 1, 1, 1));
     }
 
+    IEnumerator Start()
+    {
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "hey");
+        yield return new WaitForSeconds(2f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "we've got a problem");
+        yield return new WaitForSeconds(2f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "there's an asteroid");
+        yield return new WaitForSeconds(2f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "on a direct collision course");
+        yield return new WaitForSeconds(2f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "starting evac protocol");
+        yield return new WaitForSeconds(2f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "good luck");
+        yield return new WaitForSeconds(2f);
+        ChatManager.Instance.Say(ChatManager.ChatType.SYSTEM, "evac systems online");
+        yield return new WaitForSeconds(2f);
+    }
+
     private void Update()
     {
         _timeToImpact -= Time.deltaTime;
