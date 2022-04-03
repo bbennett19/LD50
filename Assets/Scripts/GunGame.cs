@@ -70,9 +70,6 @@ public class GunGame : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.5f);
-        TransitionManager.Instance.BigScreenQuickTransition(_compCurrent, _compNext, _bigCurrent, _bigNext);
-        yield return new WaitForSeconds(0.5f);
-
 
         if (hit)
         {
@@ -80,6 +77,7 @@ public class GunGame : MonoBehaviour
         }
 
         _completeCallback();
-        
+
+        TransitionManager.Instance.BigScreenQuickTransition(_compCurrent, _compNext, _bigCurrent, _bigNext);        
     }
 }

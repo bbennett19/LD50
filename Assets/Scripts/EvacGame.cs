@@ -12,9 +12,12 @@ public class EvacGame : MonoBehaviour
     [SerializeField]
     GameObject _greenZone, _pointer;
     [SerializeField]
-    GameObject _bigCurrent, _compCurrent, _bigNext, _compNext;
+    GameObject _bigCurrent, _compCurrent, _bigNext, _compNext, _ship;
     [SerializeField]
     TextMeshProUGUI _statusText1, _statusText2;
+
+    [SerializeField]
+    Vector3 _shipStart, _shipEnd;
 
     private float _successMin, _successMax;
 
@@ -28,6 +31,8 @@ public class EvacGame : MonoBehaviour
 
         // reset any UI
         _statusText2.text = "Pending";
+
+        _ship.transform.position = _shipStart;
 
         StartGame();
     }
@@ -65,8 +70,7 @@ public class EvacGame : MonoBehaviour
             // if last iteration/complete game
             if (_iteration == 2)
             {
-                SystemManager.Instance.EvacSuccess();
-                FinishGame();
+                StartCoroutine(FinishGame(true));
             }
             else
             {
@@ -78,7 +82,7 @@ public class EvacGame : MonoBehaviour
             // update UI
             UpdateStatusText("Abort");
             // complete game
-            FinishGame();
+            StartCoroutine(FinishGame(false));
         }
     }
 
@@ -94,9 +98,34 @@ public class EvacGame : MonoBehaviour
         }
     }
 
-    private void FinishGame()
+    private IEnumerator FinishGame(bool success)
     {
+        if (success)
+        {
+            yield return new WaitForSeconds(0.5f);
+            _ship.transform.DOMove(_shipEnd, 2f).SetEase(Ease.InSine);
+            yield return new WaitForSeconds(2.5f);
+            SystemManager.Instance.EvacSuccess();
+        }
+        else
+        {
+            GameObject flashingObj = _iteration == 1 ? _statusText1.gameObject : _statusText2.gameObject;
+            yield return new WaitForSeconds(0.5f);
+            flashingObj.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            flashingObj.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            flashingObj.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            flashingObj.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            flashingObj.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            flashingObj.SetActive(true);
+
+        }
+
         _completeCallback();
-        TransitionManager.Instance.BigScreenTransition(_compCurrent, _compNext, _bigCurrent, _bigNext);
+        TransitionManager.Instance.BigScreenQuickTransition(_compCurrent, _compNext, _bigCurrent, _bigNext);
     }
 }

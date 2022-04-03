@@ -59,7 +59,7 @@ public class TransitionManager : MonoBehaviour
         bigScreenCurrent.SetActive(false);
         _computerScreenLoading.SetActive(true);
         _bigScreenQuickLoad.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         _computerScreenLoading.SetActive(false);
         _bigScreenQuickLoad.SetActive(false);
         computerNext.SetActive(true);

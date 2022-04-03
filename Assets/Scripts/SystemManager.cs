@@ -190,7 +190,7 @@ public class SystemManager : MonoBehaviour
     {
         _active = false;
         float newTime = _timeToImpact + _usableCategoryMap[GUNS]._powerLevel * 30;
-        DOVirtual.Float(_timeToImpact, newTime, 1f, SetImpactTime).OnComplete(() => _active = true).SetEase(Ease.Linear);
+        DOVirtual.Float(_timeToImpact, newTime, 1f, SetImpactTime).SetDelay(1f).OnComplete(() => _active = true).SetEase(Ease.Linear);
     }
 
     private void SetImpactTime(float time)
@@ -208,7 +208,7 @@ public class SystemManager : MonoBehaviour
     public void EvacSuccess()
     {
         float newEvacProgress = _evacProgress + _usableCategoryMap[EVAC]._powerLevel * 10;
-        DOVirtual.Float(_evacProgress, newEvacProgress, 1f, SetEvacProgress);
+        DOVirtual.Float(_evacProgress, newEvacProgress, 1f, SetEvacProgress).SetDelay(1f);
 
         if (_evacProgress >= 100f)
         {
