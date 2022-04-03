@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Usable : MonoBehaviour
 {
-    private float _resetTime = 5f;
+    private float _resetTime = 15f;
     private float _timeSinceLastUse = 0f;
     [SerializeField]
     public int Index;
@@ -27,7 +27,11 @@ public class Usable : MonoBehaviour
 
     public void Use()
     {
-        _actionExecutor.ExecuteAction();
+        _actionExecutor.ExecuteAction(UseComplete);
+    }
+
+    private void UseComplete()
+    {
         _timeSinceLastUse = 0f;
     }
 

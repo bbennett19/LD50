@@ -29,4 +29,22 @@ public class TransitionManager : MonoBehaviour
         _computerScreenLoading.SetActive(false);
         newScreen.SetActive(true);
     }
+
+    public void BigScreenTransition(GameObject computerCurrent, GameObject computerNext, GameObject bigScreenCurrent, GameObject bigScreenNext)
+    {
+        StartCoroutine(ExecuteBigScreenTransition(computerCurrent, computerNext, bigScreenCurrent, bigScreenNext));
+    }
+
+    private IEnumerator ExecuteBigScreenTransition(GameObject computerCurrent, GameObject computerNext, GameObject bigScreenCurrent, GameObject bigScreenNext)
+    {
+        computerCurrent.SetActive(false);
+        bigScreenCurrent.SetActive(false);
+        _computerScreenLoading.SetActive(true);
+        _bigScreenLoading.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        _computerScreenLoading.SetActive(false);
+        _bigScreenLoading.SetActive(false);
+        computerNext.SetActive(true);
+        bigScreenNext.SetActive(true);
+    }
 }
