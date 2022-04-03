@@ -18,6 +18,8 @@ public class SystemManager : MonoBehaviour
     int _upgradeCost;
     [SerializeField]
     float _timeToImpact;
+    [SerializeField]
+    Asteroid _asteroid;
 
     private float _evacProgress = 0f;
 
@@ -52,6 +54,7 @@ public class SystemManager : MonoBehaviour
 
         if (_timeToImpact <= 0f)
         {
+            _timeToImpact = 0f;
             Debug.Log("GAME OVER");
         }
     }
@@ -118,7 +121,8 @@ public class SystemManager : MonoBehaviour
 
     public void AsteroidHit()
     {
-        _timeToImpact += _usableCategoryMap[GUNS]._powerLevel;
+        _timeToImpact += _usableCategoryMap[GUNS]._powerLevel * 30;
+        _asteroid.ImpactTimeUpdated();
     }
 
     public float GetEvacProgress()

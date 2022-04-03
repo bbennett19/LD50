@@ -30,6 +30,11 @@ public class Usable : MonoBehaviour
         _actionExecutor.ExecuteAction(UseComplete);
     }
 
+    public float GetReloadPercent()
+    {
+        return Mathf.Clamp01(_timeSinceLastUse / _resetTime);
+    }
+
     private void UseComplete()
     {
         _timeSinceLastUse = 0f;

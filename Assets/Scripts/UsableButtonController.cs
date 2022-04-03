@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UsableButtonController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class UsableButtonController : MonoBehaviour
     private GameObject _readyGameObject;
     [SerializeField]
     private TextMeshProUGUI _buyText;
+    [SerializeField]
+    private Image _reloadImage;
 
     private GameObject _activeGameObject = null;
 
@@ -34,6 +37,7 @@ public class UsableButtonController : MonoBehaviour
         }
         else if (SystemManager.Instance.IsUseableEnabled(_usable.Category, _usable.Index))
         {
+            _reloadImage.fillAmount = 1f - _usable.GetReloadPercent();
             EnableNewState(_reloadingGameObject);
         }
         else
