@@ -19,6 +19,6 @@ public class FundsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _fundsText.text = _headerText + SystemManager.Instance.GetFunds();
+        _fundsText.text = _headerText + SystemManager.Instance.GetDisplayFunds();
     }
 }

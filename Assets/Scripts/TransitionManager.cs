@@ -9,7 +9,7 @@ public class TransitionManager : MonoBehaviour
     [SerializeField]
     private GameObject _computerScreenLoading;
     [SerializeField]
-    private GameObject _bigScreenLoading;
+    private GameObject _bigScreenLoading, _bigScreenStatic, _bigScreenQuickLoad;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class TransitionManager : MonoBehaviour
     {
         currentScreen.SetActive(false);
         _computerScreenLoading.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         _computerScreenLoading.SetActive(false);
         newScreen.SetActive(true);
     }
@@ -41,10 +41,48 @@ public class TransitionManager : MonoBehaviour
         bigScreenCurrent.SetActive(false);
         _computerScreenLoading.SetActive(true);
         _bigScreenLoading.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         _computerScreenLoading.SetActive(false);
         _bigScreenLoading.SetActive(false);
         computerNext.SetActive(true);
         bigScreenNext.SetActive(true);
+    }
+
+    public void BigScreenQuickTransition(GameObject computerCurrent, GameObject computerNext, GameObject bigScreenCurrent, GameObject bigScreenNext)
+    {
+        StartCoroutine(ExecuteBigScreenQuickTransition(computerCurrent, computerNext, bigScreenCurrent, bigScreenNext));
+    }
+
+    private IEnumerator ExecuteBigScreenQuickTransition(GameObject computerCurrent, GameObject computerNext, GameObject bigScreenCurrent, GameObject bigScreenNext)
+    {
+        computerCurrent.SetActive(false);
+        bigScreenCurrent.SetActive(false);
+        _computerScreenLoading.SetActive(true);
+        _bigScreenQuickLoad.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        _computerScreenLoading.SetActive(false);
+        _bigScreenQuickLoad.SetActive(false);
+        computerNext.SetActive(true);
+        bigScreenNext.SetActive(true);
+    }
+
+    public void InstantScreenTransition(GameObject current, GameObject next)
+    {
+        current.SetActive(false);
+        next.SetActive(true);
+    }
+
+    public void BigScreenStaticTransition(GameObject current, GameObject next)
+    {
+        StaticTransition(current, next);
+    }
+
+    private IEnumerator StaticTransition(GameObject current, GameObject next)
+    {
+        current.SetActive(false);
+        _bigScreenStatic.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        _bigScreenStatic.SetActive(false);
+        next.SetActive(true);
     }
 }
