@@ -105,10 +105,12 @@ public class EvacGame : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             _ship.transform.DOMove(_shipEnd, 2f).SetEase(Ease.InSine);
             yield return new WaitForSeconds(2.5f);
+            ChatManager.Instance.Say(ChatManager.ChatType.SYSTEM, "launch successful");
             SystemManager.Instance.EvacSuccess();
         }
         else
         {
+            ChatManager.Instance.Say(ChatManager.ChatType.SYSTEM, "launch aborted");
             GameObject flashingObj = _iteration == 1 ? _statusText1.gameObject : _statusText2.gameObject;
             yield return new WaitForSeconds(0.5f);
             flashingObj.SetActive(false);

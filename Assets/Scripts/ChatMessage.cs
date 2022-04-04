@@ -7,6 +7,8 @@ public class ChatMessage : MonoBehaviour
 {
     [SerializeField]
     TextMeshProUGUI _text;
+    [SerializeField]
+    AudioClip _audio;
 
     private string _message;
 
@@ -31,6 +33,7 @@ public class ChatMessage : MonoBehaviour
         _text.text = "...";
         yield return new WaitForSeconds(0.33f);
         _text.text = _message;
-        // play sound effect
+
+        SoundPlayer.Instance.PlayAudio(_audio);
     }
 }

@@ -73,7 +73,11 @@ public class GunGame : MonoBehaviour
 
         if (hit)
         {
+            ChatManager.Instance.Say(ChatManager.ChatType.SYSTEM, "direct hit");
             SystemManager.Instance.AsteroidHit();
+        } else
+        {
+            ChatManager.Instance.Say(ChatManager.ChatType.SYSTEM, "miss");
         }
 
         _completeCallback();

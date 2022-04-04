@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SystemManager : MonoBehaviour
 {
@@ -26,10 +27,22 @@ public class SystemManager : MonoBehaviour
     bool _skipIntro;
     [SerializeField]
     List<float> _weaponLevelPower, _weaponLevelSpeed, _evacLevelPower, _evacLevelSpeed;
+    [SerializeField]
+    RawImage _gameOverImg;
+    [SerializeField]
+    Color _gameOverColor;
+    [SerializeField]
+    List<GameObject> _alldisableonend;
+
+    [SerializeField]
+    AudioClip _oneMinClip, _thirtySecClip;
+    [SerializeField]
+    List<AudioClip> _tenSCountdown;
 
     private float _evacProgress = 0f;
     private bool _active = false;
     private Tweener _fundsTween;
+    private bool _gameDone = false;
 
     private Dictionary<string, UsableCategory> _usableCategoryMap = new Dictionary<string, UsableCategory>();
 
@@ -66,23 +79,25 @@ public class SystemManager : MonoBehaviour
         if (!_skipIntro)
         {
             ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "hey");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "we've got a problem");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "there's an asteroid");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.5f);
             ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "on a direct collision course");
             yield return new WaitForSeconds(2f);
             ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "starting evac protocol");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
             ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "good luck");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.5f);
             ChatManager.Instance.Say(ChatManager.ChatType.SYSTEM, "evac systems online");
             yield return new WaitForSeconds(2f);
         }
         TransitionManager.Instance.InstantScreenTransition(_bigScreenLogo, _bigScreenMain);
         TransitionManager.Instance.InstantScreenTransition(_compScreenLogo, _compScreenMain);
         yield return new WaitForSeconds(0.5f);
+        _guns[0].ActivateUsable();
+        _evacCenters[0].ActivateUsable();
         _active = true;
     }
 
@@ -91,27 +106,90 @@ public class SystemManager : MonoBehaviour
         if (!_active)
             return;
 
+
         _timeToImpact -= Time.deltaTime;
 
         if (_timeToImpact <= 0f)
         {
             _timeToImpact = 0f;
+            _active = false;
             StartCoroutine(FinishGame());
+        }
+
+        int time = Mathf.FloorToInt(_timeToImpact);
+        if (time == 60)
+        {
+            Debug.Log("PLAY");
+            SoundPlayer.Instance.PlayAudio(_oneMinClip, true);
+        } else if (time == 30)
+        {
+            SoundPlayer.Instance.PlayAudio(_thirtySecClip, true);
+        } else if (time < _tenSCountdown.Count)
+        {
+            SoundPlayer.Instance.PlayAudio(_tenSCountdown[time], true);
         }
     }
 
     IEnumerator FinishGame()
     {
-        _active = false;
+        if (_gameDone)
+            yield break;
+
+        _gameDone = true;
+        _alldisableonend.ForEach(g => g.SetActive(false));
+        _compScreenLogo.SetActive(true);
+        _gameOverImg.gameObject.SetActive(true);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "You're out of time");
+        yield return new WaitForSeconds(1f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "what happened");
+        yield return new WaitForSeconds(3.2f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "...");
+        _gameOverImg.DOColor(_gameOverColor, 1.5f);
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("MainMenu");
     }
 
     IEnumerator WinGame()
     {
-        _active = false;
-        yield return null;
-        SceneManager.LoadScene("GameOver");
+        if (_gameDone)
+            yield break;
+
+        _gameDone = true;
+        // deactive screens
+        _alldisableonend.ForEach(g => g.SetActive(false));
+        _compScreenLogo.SetActive(true);
+        _gameOverImg.gameObject.SetActive(true);
+        // prez lines
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "Good job");
+        yield return new WaitForSeconds(3f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "You've made humanity proud");
+        yield return new WaitForSeconds(3f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "Oh!");
+        yield return new WaitForSeconds(0.5f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "We're not at 100% evactuated");
+        yield return new WaitForSeconds(0.5f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "it says there's one person left");
+        yield return new WaitForSeconds(4f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "oops...");
+        yield return new WaitForSeconds(4f);
+        ChatManager.Instance.Say(ChatManager.ChatType.PRESIDENT, "uhh I'm losing signal...");
+
+        // count down timer to 10
+        if (_timeToImpact > 15f) {
+            _active = false;
+            Debug.Log("wait " + _timeToImpact);
+            _asteroid.Override(15f);
+            DOVirtual.Float(_timeToImpact, 10f, 5f, t => _timeToImpact = t);
+            yield return new WaitForSeconds(5f);
+        }
+
+        _active = true;
+        Debug.Log("wait " + (_timeToImpact + 2f));
+        yield return new WaitForSeconds(_timeToImpact + 2f);
+
+        _gameOverImg.DOColor(_gameOverColor, 1.5f);
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public bool IsUseableEnabled(string category, int i)
@@ -131,7 +209,9 @@ public class SystemManager : MonoBehaviour
 
     public void EnableNewUsable(string category)
     {
+        int numActive = _usableCategoryMap[category]._enabledCount;
         _usableCategoryMap[category]._enabledCount++;
+        _usableCategoryMap[category]._usables[numActive].ActivateUsable();
     }
 
     public void IncreaseUsablePowerLevel(string category)

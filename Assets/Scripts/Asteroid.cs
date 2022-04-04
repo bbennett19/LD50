@@ -14,6 +14,12 @@ public class Asteroid : MonoBehaviour
         ImpactTimeUpdated();
     }
 
+    public void Override(float time)
+    {
+        DOTween.Kill(transform);
+        transform.DOMoveX(_dest, time).SetEase(Ease.Linear);
+    }
+
     public void ImpactTimeUpdated()
     {
         transform.DOMoveX(_dest, SystemManager.Instance.GetTimeToImpact()).SetEase(Ease.Linear);

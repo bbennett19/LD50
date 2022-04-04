@@ -173,8 +173,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 2
   Category: EVAC
+  displayName: shuttle
+  systemText: ready to launch
   Cost: 300
   _actionExecutor: {fileID: 1973086666}
+  isActive: 0
+  gotReady: 0
 --- !u!1 &25541935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,6 +1513,7 @@ RectTransform:
   - {fileID: 2005364993}
   - {fileID: 262737892}
   - {fileID: 340483549}
+  - {fileID: 271409785}
   m_Father: {fileID: 171529522}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1591,6 +1596,78 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1449076926689066219, guid: e292ce2393703e44e8c20101be4d2d86, type: 3}
   m_PrefabInstance: {fileID: 305277342}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &271409784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 271409785}
+  - component: {fileID: 271409787}
+  - component: {fileID: 271409786}
+  m_Layer: 5
+  m_Name: gameoverOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &271409785
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271409784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 250560713}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 57.39496, y: -20.490004}
+  m_SizeDelta: {x: 114.79007, y: 40.979992}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &271409786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271409784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9528302, g: 0.94400096, b: 0.75956744, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &271409787
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271409784}
+  m_CullTransparentMesh: 1
 --- !u!1 &291206999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,8 +2613,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 0
   Category: GUNS
+  displayName: gun
+  systemText: ready to fire
   Cost: 0
   _actionExecutor: {fileID: 953043092}
+  isActive: 0
+  gotReady: 0
 --- !u!1001 &414270397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3676,8 +3757,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 0
   Category: EVAC
+  displayName: shuttle
+  systemText: ready to launch
   Cost: 0
   _actionExecutor: {fileID: 1973086666}
+  isActive: 0
+  gotReady: 0
 --- !u!1001 &631055360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3849,8 +3934,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 3
   Category: GUNS
+  displayName: gun
+  systemText: ready to fire
   Cost: 300
   _actionExecutor: {fileID: 953043092}
+  isActive: 0
+  gotReady: 0
 --- !u!1 &634608411
 GameObject:
   m_ObjectHideFlags: 0
@@ -6283,8 +6372,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 1
   Category: EVAC
+  displayName: shuttle
+  systemText: ready to launch
   Cost: 150
   _actionExecutor: {fileID: 1973086666}
+  isActive: 0
+  gotReady: 0
 --- !u!1 &1036915530
 GameObject:
   m_ObjectHideFlags: 0
@@ -6512,6 +6605,8 @@ GameObject:
   - component: {fileID: 1056387160}
   - component: {fileID: 1056387162}
   - component: {fileID: 1056387163}
+  - component: {fileID: 1056387165}
+  - component: {fileID: 1056387164}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -6545,13 +6640,13 @@ MonoBehaviour:
   _moneyPerHit: 50
   _moneyPerEvac: 50
   _displayFunds: 0
-  _timeToImpact: 60
+  _timeToImpact: 70
   _asteroid: {fileID: 1797387880}
   _bigScreenLogo: {fileID: 1124769694}
   _bigScreenMain: {fileID: 1241704079}
   _compScreenLogo: {fileID: 414270399}
   _compScreenMain: {fileID: 1480735572}
-  _skipIntro: 1
+  _skipIntro: 0
   _weaponLevelPower:
   - 12
   - 15
@@ -6572,6 +6667,30 @@ MonoBehaviour:
   - 35
   - 30
   - 25
+  _gameOverImg: {fileID: 271409786}
+  _gameOverColor: {r: 0.9529412, g: 0.94509804, b: 0.7607843, a: 1}
+  _alldisableonend:
+  - {fileID: 1480735572}
+  - {fileID: 232715598}
+  - {fileID: 49376673}
+  - {fileID: 727266877}
+  - {fileID: 909125651}
+  - {fileID: 262737891}
+  - {fileID: 1220220508}
+  _oneMinClip: {fileID: 8300000, guid: 3a2f05728b6aa9642a613d007f5d3e5f, type: 3}
+  _thirtySecClip: {fileID: 8300000, guid: 96e4a43dcc7b72f4e8567c0d28f0e662, type: 3}
+  _tenSCountdown:
+  - {fileID: 8300000, guid: 3e4a47f4405c06f4db5034cf8a72177b, type: 3}
+  - {fileID: 8300000, guid: d626a3d3f77d5d84f83961f077418b2f, type: 3}
+  - {fileID: 8300000, guid: 20aa27c8705e0434e966b3b329d242a5, type: 3}
+  - {fileID: 8300000, guid: 262f7dffdeec8e745bec2b8b8cd3bd6c, type: 3}
+  - {fileID: 8300000, guid: ef8e392f50ea31a4aa3d8ecf4cb936d9, type: 3}
+  - {fileID: 8300000, guid: 2148efb4fca38ca40ae9c614277352ff, type: 3}
+  - {fileID: 8300000, guid: 63996f7183f26b642904a241edfb7de9, type: 3}
+  - {fileID: 8300000, guid: a6e2c338a601ff24fa01ad5be84369cf, type: 3}
+  - {fileID: 8300000, guid: 5fddb7374c15e5940aaf73596ed4f670, type: 3}
+  - {fileID: 8300000, guid: 455833eaf403e5b41b3d03d8f9becb6c, type: 3}
+  - {fileID: 8300000, guid: 16253debdc6257545b948787764c9ea0, type: 3}
 --- !u!4 &1056387161
 Transform:
   m_ObjectHideFlags: 0
@@ -6620,6 +6739,115 @@ MonoBehaviour:
   _presendentItemPrefab: {fileID: 1570164524435295479, guid: 750d1d85237480e4b934ad7d84fe74b8, type: 3}
   _chatParent: {fileID: 29407792}
   _scrollRect: {fileID: 307385171}
+--- !u!82 &1056387164
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056387159}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1056387165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056387159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37f9e3c3bbf00243ba31a5f3b9f64d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 1056387164}
 --- !u!114 &1068794418 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3733556349554804182, guid: 80fe4d5864093ae4fad98db4762d23cb, type: 3}
@@ -7116,8 +7344,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 1
   Category: GUNS
+  displayName: gun
+  systemText: ready to fire
   Cost: 100
   _actionExecutor: {fileID: 953043092}
+  isActive: 0
+  gotReady: 0
 --- !u!224 &1225958866 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6319126296528766357, guid: 957d29cdef8902a4a8c4beb3456e32b5, type: 3}
@@ -7168,8 +7400,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 3
   Category: EVAC
+  displayName: shuttle
+  systemText: ready to launch
   Cost: 450
   _actionExecutor: {fileID: 1973086666}
+  isActive: 0
+  gotReady: 0
 --- !u!1 &1241704079
 GameObject:
   m_ObjectHideFlags: 0
@@ -7808,7 +8044,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Department   of   asteriod   defence
+  m_text: Department   of   asteroid   defence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 46d2f72610f7c7e4d9ae495c948938a1, type: 2}
   m_sharedMaterial: {fileID: -2043240647235669001, guid: 46d2f72610f7c7e4d9ae495c948938a1, type: 2}
@@ -10454,7 +10690,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: bdca31f9b2c6d2d45b2e70770bffcc0d, type: 3}
   m_Color: {r: 0.7075472, g: 0.043387346, b: 0.043387346, a: 1}
   m_FlipX: 0
@@ -11402,8 +11638,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 2
   Category: GUNS
+  displayName: gun
+  systemText: ready to fire
   Cost: 200
   _actionExecutor: {fileID: 953043092}
+  isActive: 0
+  gotReady: 0
 --- !u!1 &1973086664
 GameObject:
   m_ObjectHideFlags: 0

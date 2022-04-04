@@ -9,11 +9,15 @@ public class Usable : MonoBehaviour
     [SerializeField]
     public int Index;
     [SerializeField]
-    public string Category;
+    public string Category, displayName, systemText;
     [SerializeField]
     public int Cost;
     [SerializeField]
     private ActionExecutor _actionExecutor;
+    [SerializeField]
+    private bool isActive = false;
+    [SerializeField]
+    private bool gotReady = false;
 
     private void Awake()
     {
@@ -23,6 +27,11 @@ public class Usable : MonoBehaviour
     public void UpdateResetTime(float newTime)
     {
         _resetTime = newTime;
+    }
+
+    public void ActivateUsable()
+    {
+        isActive = true;
     }
 
     public bool CanUse()
@@ -43,10 +52,21 @@ public class Usable : MonoBehaviour
     private void UseComplete()
     {
         _timeSinceLastUse = 0f;
+        gotReady = false;
     }
 
     private void Update()
     {
+        if (!isActive)
+            return;
+
         _timeSinceLastUse += Time.deltaTime;
+
+        if (_timeSinceLastUse >= _resetTime && !gotReady)
+        {
+            gotReady = true;
+            int t = Index + 1;
+            ChatManager.Instance.Say(ChatManager.ChatType.SYSTEM, displayName + t + " " + systemText);
+        }
     }
 }

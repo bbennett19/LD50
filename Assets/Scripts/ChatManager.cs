@@ -20,6 +20,7 @@ public class ChatManager : MonoBehaviour
 
     public void Say(ChatType chatType, string message)
     {
+        Debug.Log("CHAT: " + chatType.ToString() + ": " + message);
         switch (chatType)
         {
             case ChatType.SYSTEM:
